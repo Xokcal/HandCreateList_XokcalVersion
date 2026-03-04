@@ -27,4 +27,8 @@ class ListLinkTable<T> {
     }
 
     public ListLinkTable(){}
+
+    boolean isEmpty() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }
