@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 @SuppressWarnings("all")
-public class XokcalList<T> {
+class XokcalList<T> implements MyList<T>{
     private ListLinkTable<T> head;
     private int size = 0;
 
@@ -18,6 +18,7 @@ public class XokcalList<T> {
     }
 
     // 添加数据
+    @Override
     public void add(T data) {
         ListLinkTable<T> node = new ListLinkTable<>(data, null);
         ListLinkTable<T> h = head;
@@ -33,6 +34,7 @@ public class XokcalList<T> {
     }
 
     // 打印集合
+    @Override
     public void print() {
         if(isEmpty()){
             System.out.println("[]");
@@ -47,6 +49,7 @@ public class XokcalList<T> {
     }
 
     //头插法
+    @Override
     public void addHead(T data){
         ListLinkTable<T> newNode = new ListLinkTable<>(data , head);
         head = newNode;
@@ -54,6 +57,7 @@ public class XokcalList<T> {
     }
 
     //倒转链表
+    @Override
     public void reverse(){
         ListLinkTable<T> tail = null;
         ListLinkTable<T> h = head;
@@ -67,6 +71,7 @@ public class XokcalList<T> {
     }
 
     //通过索引获得数据
+    @Override
     public T getIndex(int index){
         if (index < 0 ||index >= size) {
             System.out.println(INDEX_INVALID);
@@ -85,6 +90,7 @@ public class XokcalList<T> {
     }
 // 添加了isEmpty，contains，remove，toList，addAll等方法
     //判断空
+    @Override
     public boolean isEmpty(){
         return size == 0;
     }
@@ -105,6 +111,7 @@ public class XokcalList<T> {
     }
 
     //通过索引移除
+    @Override
     public T remove(int index){ //2
         if (index < 0 ||index >= size) {
             System.out.println(INDEX_INVALID);
@@ -134,6 +141,7 @@ public class XokcalList<T> {
     }
 
     //通过指定数据移除
+    @Override
     public boolean  remove(Object o){
         if(o == null){
             return false;
@@ -160,9 +168,10 @@ public class XokcalList<T> {
     }
 
     //转为官方List
+    @Override
     public List<T> toList(){
         if(isEmpty()){
-            return null;
+            return new ArrayList<>();
         }
         List<T> list = new ArrayList<>();
         ListLinkTable<T> h = head;
@@ -174,6 +183,7 @@ public class XokcalList<T> {
     }
 
     //添加其他集合数据
+    @Override
     public boolean addAll(Collection<? extends T> c){
         if(c.isEmpty() || isEmpty()){
             return false;
@@ -183,12 +193,142 @@ public class XokcalList<T> {
             h = h.getNext();
         }
         for(T t : c){
+            System.out.println(t);
             ListLinkTable n = new ListLinkTable<>(t , null);
             h.setNext(n);
             h = h.getNext();
             size++;
         }
         return true;
+    }
+
+    //指定索引添加元素
+    @Override
+    public boolean add(int index , T t){
+        if(index < 0 || index >= size || t == null)return false;
+        ListLinkTable<T> h = head;
+        ListLinkTable<T> n = new ListLinkTable<>(t , null);
+        ListLinkTable<T> up = null;
+        int i = 0;
+        while(h != null){
+            if(i == index){
+                if(i == 0){
+                    n.setNext(h);
+                    head = n;
+                    size++;
+                    return true;
+                }
+                up.setNext(n);
+                n.setNext(h);
+                size++;
+                return true;
+            }
+            up = h;
+            h = h.getNext();
+            i++;
+        }
+        return false;
+    }
+
+    //清空
+    @Override
+    public boolean clear(){
+        if(size == 0)return true;
+        head = null;
+        size = 0;
+        return true;
+    }
+
+    @Override
+    public boolean addAll(int index , Collection<? extends T> t){
+        if(index <= 0 || index >= size || t == null)return false;
+        ListLinkTable<T> h = head;
+        ListLinkTable<T> up = null;
+        int i = 0;
+        while(h != null){
+            if(i == index){
+                for (T e : t) {
+                    ListLinkTable<T> e_n = new ListLinkTable<>(e , null);
+                    up.setNext(e_n);
+                    up = up.getNext();
+                    size++;
+                }
+                up.setNext(h);
+                return true;
+            }
+            up = h;
+            h = h.getNext();
+            i++;
+        }
+        return false;
+    }
+
+    @Override
+    public String toString(){
+        if(isEmpty())return "[]";
+        ListLinkTable<T> h = head;
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        while(h != null){
+            if(h.getNext() == null){
+                sb.append(h.getData()+"]");
+                return sb.toString();
+            }
+            sb.append(h.getData()+",");
+            h = h.getNext();    
+        }
+        return sb.toString();
+    }
+
+    //通过T查找索引
+    public int indexOf(T t){
+        if(t == null)return -1;
+        ListLinkTable<T> h = head;
+        int i = 0;
+        while(h != null){
+            if(t.equals(h.getData()))return i;
+            h = h.getNext();
+            i++;
+        }
+        return -1;
+    }
+
+    //替换指定索引数据为t
+     @Override
+    public T set(int index , T t){
+        if(index < 0 || index >= size || t == null)return null;
+        ListLinkTable<T> h = head;
+        T r = null;
+        int i = 0;
+        while(h != null){
+            if(i == index){
+                r = h.getData();
+                h.setData(t);
+                return r;
+            }
+            h = h.getNext();
+            i++;
+        }
+        return null;
+    }
+
+    //查找最后索引
+    @Override
+    public int lastIndexOf(T t){
+        if(t == null)return -1;
+        reverse();
+        ListLinkTable<T> h = head;
+        int i = size - 1;
+        while(h != null){
+            if(t.equals(h.getData())){
+                reverse();
+                return i;
+            }
+            h = h.getNext();
+            i--;
+        }
+        reverse();
+        return -1;
     }
 
 }

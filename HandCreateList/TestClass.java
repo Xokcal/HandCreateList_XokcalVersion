@@ -6,7 +6,8 @@ import java.util.List;
 @SuppressWarnings("all")
 public class TestClass {
     public static void main(String[] args) {
-        XokcalList<String> list = new XokcalList<>();
+        // XokcalList<String> list = new XokcalList<>();
+        MyList<String> list = new XokcalList<>();
         System.out.println("Hello World!");
         list.add("hello1");
         list.add("hello2");
@@ -55,5 +56,42 @@ public class TestClass {
         boolean all = list.addAll(l);
         list.print();
         System.out.println(all);
+        System.out.println("============");
+        boolean b = list.add(2, "C");
+        System.out.println(b);
+        list.print();
+        System.out.println("============");
+        // boolean clear = list.clear();
+        // System.out.println(clear);
+        // list.print();
+        System.out.println("============");
+        List<String> laoda = new ArrayList<>();
+        laoda.add("a");
+        laoda.add("b");
+        laoda.add("c");
+        boolean c = list.addAll(2, laoda);
+        list.print();
+        int size3 = list.size();
+        System.out.println(size3);
+        System.out.println(c);
+        System.out.println("============");
+        String string = list.toString();
+        System.out.println(string);
+        System.out.println("============");
+        int index2 = list.indexOf("b");
+        System.out.println(index2);
+        System.out.println("============");
+        String set = list.set(2, "可爱");
+        System.out.println(set);
+        String string2 = list.toString();
+        System.out.println(string2);
+        System.out.println("============");
+        // list.lastIndexOf()
+        list.add("c");
+        String string3 = list.toString();
+        System.out.println(string3);
+        int lastIndexOf = list.lastIndexOf("c");
+        System.out.println(lastIndexOf);
+        list.print();
     }
 }
