@@ -368,4 +368,51 @@ class XokcalList<T> implements MyList<T>{
         return  o;
     }
 
+    //排序
+    @Override
+    public void sort(){
+        Object[] arr = toArray();
+        sort(arr , 0 , arr.length - 1);
+        replaceWithArray(arr);
+    }
+
+    //链表清空链接所有数组数据
+    @Override
+    public void replaceWithArray(Object[] arr){
+        clear();
+        if(arr.length == 0)return;
+        head = new ListLinkTable<>((T)arr[0] , null);
+        size++;
+        ListLinkTable<T> h = head;
+        int i = 1;
+        while(i < arr.length){
+            h.setNext(new ListLinkTable<>((T)arr[i] , null));
+            h = h.getNext();
+            i++;
+            size++;
+        }
+    }
+
+    private void sort(Object[] arr , int left , int right){
+        if(left >= right)return;
+        int l = left;
+        int r = right;
+        int mid = l + ((r - l) / 2);
+        Comparable<Object> pivot = (Comparable<Object>)arr[mid];
+        while(l <= r){
+            while(l <= r && pivot.compareTo(arr[l]) > 0)l++;
+            while(l <= r && pivot.compareTo(arr[r]) < 0)r--;
+            if(l <= r){
+                Object t = arr[l];
+                arr[l] = arr[r];
+                arr[r] = t;
+                l++;
+                r--;
+            }
+        }
+
+        sort(arr , left , r);
+        sort(arr , l , right);
+    }
+
 }

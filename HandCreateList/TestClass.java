@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 @SuppressWarnings("all")
 public class TestClass {
+    // private static final MyList<String> list = new XokcalList<>();
     // public static void main(String[] args) {
     //     // XokcalList<String> list = new XokcalList<>();
     //     MyList<String> list = new XokcalList<>();
@@ -101,10 +102,13 @@ public class TestClass {
     public static void main(String[] args) {
         MyList<String> list = new XokcalList<>();
         System.out.println("Hello World!");
-        list.add("hello1");
         list.add("hello2");
-        list.add("hello3");
         list.add("hello4");
+        list.add("hello3");
+        list.add("hello1");
+        list.print();
+        System.out.println("============");
+        list.sort();
         list.print();
         System.out.println("============");
         XokcalList<String> subList1 = list.subList(0, 2);
@@ -113,7 +117,20 @@ public class TestClass {
         Object[] array = list.toArray();
         System.out.println("数组："+Arrays.toString(array));
         System.out.println("============");
-        System.out.println('w' < 'd');
+        System.out.println("s".compareTo("c"));
+        System.out.println("============");
+        list.print();
+        list.sort();
+        list.print();
+        int size = list.size();
+        System.out.println(size);
+        System.out.println("============");
+        Object[] o = new Object[]{3,4,1,6,3};
+        list.replaceWithArray(o);
+        list.print();
+        System.out.println("============");
+        list.sort();
+        list.print();
     }
 
 

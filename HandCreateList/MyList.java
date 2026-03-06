@@ -66,4 +66,10 @@ public interface MyList<T> {
 
     //转化为数组
     public Object[] toArray();
+
+    //排序
+    public void sort();
+
+    //链表清空链接所有数组数据
+    public void replaceWithArray(Object[] arr);
 }
