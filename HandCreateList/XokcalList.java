@@ -11,6 +11,7 @@ class XokcalList<T> implements MyList<T>{
 
     private static final String INDEX_INVALID = "索引不合法";
     private static final String INDEX_OUT_BOUND_ERROR = "索引超出范围！";
+    private static final String INDEX_OUT_OF_BOUNDS_EXCEPTION = "索引超出范围！";
 
     // 得到大小
     public int size() {
@@ -329,6 +330,42 @@ class XokcalList<T> implements MyList<T>{
         }
         reverse();
         return -1;
+    }
+
+    //根据索引截取
+    @Override
+    public XokcalList<T> subList(int fromIndex, int toIndex){
+        if(fromIndex < 0 || toIndex > size || fromIndex > toIndex)
+        throw new IndexOutOfBoundsException(INDEX_OUT_OF_BOUNDS_EXCEPTION);
+        ListLinkTable<T> h = head;
+        XokcalList<T> x = new XokcalList<>();
+        int i = 0;
+        while(h != null){
+            if(i >= fromIndex && i < toIndex){
+                x.add(h.getData());
+            }
+            if(i == toIndex){
+                return x;
+            }
+            h = h.getNext();
+            i++;
+        }
+        return x;
+    }
+
+    //转化为数组
+    @Override
+    public Object[] toArray(){
+        if(isEmpty())return new  Object[size];
+        ListLinkTable<T> h = head;
+        Object[] o = new Object[size];
+        int i = 0;
+        while(h != null){
+            o[i] = h.getData();
+            h = h.getNext();
+            i++;
+        }
+        return  o;
     }
 
 }

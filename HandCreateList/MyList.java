@@ -60,4 +60,10 @@ public interface MyList<T> {
 
     //查找最后索引
     public int lastIndexOf(T t);
+
+    //根据索引截取
+    public XokcalList<T> subList(int fromIndex, int toIndex);
+
+    //转化为数组
+    public Object[] toArray();
 }
