@@ -1,6 +1,6 @@
 package HandCreateList;
 
-import java.util.Arrays;
+import HandCreateList.XokcalList.XokcalIterator;
 
 @SuppressWarnings("all")
 public class TestClass {
@@ -99,38 +99,66 @@ public class TestClass {
     //     subList.print();
     // }
 
+    // public static void main(String[] args) {
+    //     MyList<String> list = new XokcalList<>();
+    //     System.out.println("Hello World!");
+    //     list.add("hello2");
+    //     list.add("hello4");
+    //     list.add("hello3");
+    //     list.add("hello1");
+    //     list.print();
+    //     System.out.println("============");
+    //     list.sort();
+    //     list.print();
+    //     System.out.println("============");
+    //     XokcalList<String> subList1 = list.subList(0, 2);
+    //     subList1.print();
+    //     System.out.println("============");
+    //     Object[] array = list.toArray();
+    //     System.out.println("数组："+Arrays.toString(array));
+    //     System.out.println("============");
+    //     System.out.println("s".compareTo("c"));
+    //     System.out.println("============");
+    //     list.print();
+    //     list.sort();
+    //     list.print();
+    //     int size = list.size();
+    //     System.out.println(size);
+    //     System.out.println("============");
+    //     Object[] o = new Object[]{3,4,1,6,3};
+    //     list.replaceWithArray(o);
+    //     list.print();
+    //     System.out.println("============");
+    //     list.sort();
+    //     list.print();
+    //     System.out.println("============");
+    //     list.set(2, "哈基米");
+    //     list.print();
+    //     System.out.println("============");
+    //     list.sort();
+    //     String string = list.toString();
+    //     System.out.println(string);
+    //     // System.out.println("============");
+    //     // XokcalIterator iterator = list.iterator();
+    //     // while(iterator.hasNext()){
+    //     //     System.out.println(iterator.next());
+    //     // }
+    // }
+
     public static void main(String[] args) {
-        MyList<String> list = new XokcalList<>();
-        System.out.println("Hello World!");
-        list.add("hello2");
-        list.add("hello4");
-        list.add("hello3");
-        list.add("hello1");
-        list.print();
-        System.out.println("============");
-        list.sort();
-        list.print();
-        System.out.println("============");
-        XokcalList<String> subList1 = list.subList(0, 2);
-        subList1.print();
-        System.out.println("============");
-        Object[] array = list.toArray();
-        System.out.println("数组："+Arrays.toString(array));
-        System.out.println("============");
-        System.out.println("s".compareTo("c"));
-        System.out.println("============");
-        list.print();
-        list.sort();
-        list.print();
-        int size = list.size();
-        System.out.println(size);
-        System.out.println("============");
-        Object[] o = new Object[]{3,4,1,6,3};
-        list.replaceWithArray(o);
-        list.print();
-        System.out.println("============");
-        list.sort();
-        list.print();
+        MyList<Integer> list = new XokcalList<>();
+        list.add(2);
+        list.add(4);
+        list.add(6);
+        list.add(7);
+        list.print(); 
+        System.out.println("==============");
+        XokcalIterator iterator = list.iterator();
+        Integer sum = null;
+        while(iterator.hasNext()){
+            System.out.println(iterator.next() + iterator.next());
+        }
+        System.out.println(iterator.next());
     }
 
 

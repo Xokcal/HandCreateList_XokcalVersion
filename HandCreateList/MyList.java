@@ -1,9 +1,12 @@
 package HandCreateList;
 
+import HandCreateList.XokcalList.XokcalIterator;
 import java.util.Collection;
 import java.util.List;
 
 public interface MyList<T> {
+    //获得内部迭代器
+    public XokcalIterator iterator();
     // 得到大小
     public int size();
 

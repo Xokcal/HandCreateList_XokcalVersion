@@ -12,6 +12,34 @@ class XokcalList<T> implements MyList<T>{
     private static final String INDEX_INVALID = "索引不合法";
     private static final String INDEX_OUT_BOUND_ERROR = "索引超出范围！";
     private static final String INDEX_OUT_OF_BOUNDS_EXCEPTION = "索引超出范围！";
+    private static final String ITERATOR_END_EXCEPTION = "迭代器已遍历到最后！";
+
+    //内部迭代器
+    public class XokcalIterator implements Iterator<T>{
+        ListLinkTable<T> iteratorCurr = head;
+
+        @Override
+        public boolean hasNext() {
+            return iteratorCurr != null;
+        }
+
+        @Override
+        public T next() {
+            if(!hasNext()){
+                throw new RuntimeException(ITERATOR_END_EXCEPTION);
+            }
+            T e = iteratorCurr.getData();
+            iteratorCurr = iteratorCurr.getNext();
+            return e;
+        }
+
+    }
+
+    //获得内部迭代器
+    @Override
+    public XokcalIterator iterator(){
+        return new XokcalIterator();
+    }
 
     // 得到大小
     public int size() {
